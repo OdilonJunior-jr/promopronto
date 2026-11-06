@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#101815" name="theme-color"/><title>Minha conta | PromoPronto Studio</title><meta content="Entre com seu e-mail e acesse o PromoPronto Studio online." name="description"/><style>
+:root{color-scheme:dark;--ink:#f4f7f3;--muted:#a3b1a8;--green:#c8ef87}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#101815;display:flex;flex-direction:column}a{color:inherit}header{display:flex;align-items:center;justify-content:space-between;padding:20px max(20px,calc((100vw - 1150px)/2));border-bottom:1px solid #2b392f}header a{text-decoration:none}.logo{letter-spacing:-.055em;font-size:22px;font-weight:860}.logo b{color:var(--green)}.back{color:#acb8b0;font-size:13px}.page{width:100%;max-width:1080px;margin:auto;display:grid;grid-template-columns:1.04fr .96fr;gap:52px;align-items:center;padding:45px 24px 80px}.hero{padding:12px}.eyebrow{font-size:12px;color:var(--green);font-weight:800;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(39px,5vw,67px);line-height:1.04;letter-spacing:-.065em;margin:16px 0}.hero p{font-size:16px;line-height:1.65;color:var(--muted);max-width:430px}.benefit{display:flex;gap:10px;align-items:center;color:#d1ddd2;font-size:13px;margin-top:28px}.benefit span{background:#26382a;border-radius:8px;padding:8px;color:var(--green)}.card{background:#fff;color:#19261e;padding:34px;border-radius:24px;box-shadow:0 28px 85px #0004}.card h2{font-size:26px;letter-spacing:-.05em;margin:0 0 9px}.card p{color:#68786d;font-size:14px;line-height:1.65;margin:0 0 25px}.card label{display:block;font-size:12px;font-weight:800;margin-bottom:8px}.card input{width:100%;border:1px solid #d9e4da;border-radius:12px;font-size:16px;padding:15px 14px;color:#17271b;background:#fafcfb}.card button{width:100%;border:0;border-radius:12px;font-size:15px;font-weight:850;background:#234c36;color:white;padding:16px;cursor:pointer;margin-top:14px}.card button:hover{background:#316348}.card button:disabled{opacity:.55;cursor:wait}.status{min-height:24px;margin-top:13px;font-size:13px;color:#546457;line-height:1.5}.status.error{color:#a42b3f}.status.success{color:#266c3e}.note{font-size:12px!important;color:#879289!important;margin:18px 0 0!important}.hidden{display:none!important}#editorFrame{width:100%;height:100dvh;border:0;background:#fff;display:block}.topEditor{position:fixed;z-index:100;top:10px;right:10px;display:flex;gap:8px}.topEditor button{border:1px solid #d5dfd7;border-radius:999px;background:#fff;color:#234532;cursor:pointer;font-weight:700;padding:9px 14px;box-shadow:0 8px 20px #0002}#editorContainer{position:fixed;inset:0;z-index:99;background:#eaecea}.loading{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;text-align:center;color:#bac8bd}@media(max-width:780px){.page{display:flex;flex-direction:column;align-items:stretch;gap:26px;padding:38px 18px 80px}.hero h1{font-size:40px}.hero p{font-size:14px}.card{padding:24px;border-radius:18px}.benefit{margin-top:15px}header{padding:17px 18px}.back{font-size:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style><link rel="icon" type="image/svg+xml" href="/favicon.svg"></head><body>
+<div id="publicArea"><header><a class="logo" href="/">promo<b>pronto.</b></a><a class="back" href="/">← Voltar ao site</a></header><main class="page"><div class="hero"><div class="eyebrow">ACESSO DO COMPRADOR</div><h1>Seu estúdio.<br/>Onde você estiver.</h1><p>Entrou, criou, publicou. Sem instalar aplicativo e sem baixar o editor. Acesse pelo celular ou computador.</p><div class="benefit"><span>✓</span> Login seguro por e-mail · Sem senha para lembrar</div></div><section class="card"><h2>Entrar no PromoPronto</h2><p>Use o mesmo e-mail informado na compra. Vamos enviar um link de entrada para sua caixa de entrada.</p><form id="loginForm"><label for="email">Seu e-mail</label><input autocomplete="email" id="email" name="email" placeholder="voce@exemplo.com" required="" type="email"/><button id="sendBtn" type="submit">Receber link de acesso</button></form><div aria-live="polite" class="status" id="status"></div><p class="note">Ainda não comprou? <a href="/">Conheça a ferramenta</a>. O acesso só é liberado após a confirmação do pagamento.</p></section></main></div>
+<div class="hidden" id="editorContainer"><div class="loading" id="loadingEditor">Validando sua compra e abrindo o editor…</div><iframe allow="clipboard-write" class="hidden" id="editorFrame" referrerpolicy="no-referrer" title="PromoPronto Studio — editor"></iframe><div class="topEditor"><button id="exitBtn" title="Sair da conta" type="button">Sair</button></div></div>
+<script src="/config.js"></script><script type="module">const cfg = window.PROMOPRONTO_CONFIG || {}, f = cfg.firebase || {};
+const $ = id => document.getElementById(id), status=$('status'), form=$('loginForm');
+const ready = [f.apiKey,f.projectId,f.appId,f.authDomain].every(v => typeof v==='string' && v && !/^(INSIRA_|SEU_)/.test(v));
+if (!ready) {
+  status.textContent='Acesso ainda em configuração. O site de vendas já está no ar, mas o login será liberado na próxima etapa.';
+  status.className='status error';form.querySelector('button').disabled=true;
+} else {
+  initializeAccess().catch(err => {console.error('Falha ao iniciar autenticação',err);status.textContent='O acesso está temporariamente indisponível.';status.className='status error';form.querySelector('button').disabled=true;});
+}
+async function initializeAccess(){
+ const [{initializeApp},{getAuth,onAuthStateChanged,sendSignInLinkToEmail,isSignInWithEmailLink,signInWithEmailLink,signOut}] = await Promise.all([
+  import('https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js'),
+  import('https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js')
+ ]);
+ const auth=getAuth(initializeApp(f)); auth.languageCode='pt';
+ let opening=false;
+ async function openEditor(user){
+  if(opening) return; opening=true;
+  $('publicArea').classList.add('hidden');$('editorContainer').classList.remove('hidden');
+  $('loadingEditor').textContent='Validando sua compra e abrindo o editor…';
+  try{
+   const token=await user.getIdToken();
+   const res=await fetch('/api/editor',{headers:{Authorization:`Bearer ${token}`},cache:'no-store'});
+   if(!res.ok){const data=await res.json().catch(()=>({}));throw new Error(res.status===403?'Ainda não identificamos uma compra ativa neste e-mail.':'Não foi possível liberar o editor agora.');}
+   const html=await res.text();$('editorFrame').srcdoc=html;
+   $('editorFrame').classList.remove('hidden');$('loadingEditor').classList.add('hidden');
+  }catch(err){$('editorContainer').classList.add('hidden');$('publicArea').classList.remove('hidden');status.textContent=err.message||'Não foi possível entrar.';status.className='status error';}
+  finally{opening=false;}
+ }
+ form.addEventListener('submit',async ev=>{
+  ev.preventDefault();const email=$('email').value.trim().toLowerCase();if(!email)return;
+  const btn=$('sendBtn');btn.disabled=true;status.textContent='Enviando link…';status.className='status';
+  try{
+   await sendSignInLinkToEmail(auth,email,{url:`${location.origin}/acesso.html`,handleCodeInApp:true});
+   localStorage.setItem('promopronto_login_email',email);
+   status.textContent='Verifique seu e-mail e a pasta de spam.';status.className='status success';
+  }catch(err){status.textContent='Não foi possível enviar o link. Confira o endereço ou tente novamente.';status.className='status error';console.error(err.code||err.message);}
+  finally{btn.disabled=false;}
+ });
+ $('exitBtn').onclick=async()=>{await signOut(auth);$('editorFrame').srcdoc='';$('editorFrame').classList.add('hidden');$('editorContainer').classList.add('hidden');$('publicArea').classList.remove('hidden');};
+ if(isSignInWithEmailLink(auth,location.href)){
+  let email=localStorage.getItem('promopronto_login_email');
+  if(!email)email=prompt('Informe o e-mail usado para solicitar acesso:');
+  if(email){try{await signInWithEmailLink(auth,email.trim().toLowerCase(),location.href);localStorage.removeItem('promopronto_login_email');history.replaceState({},'', '/acesso.html');}catch{status.textContent='Link expirado ou inválido. Solicite um novo.';status.className='status error';}}
+ }
+ onAuthStateChanged(auth,u=>{if(u&&u.emailVerified)openEditor(u);});
+}
+</script></body></html>

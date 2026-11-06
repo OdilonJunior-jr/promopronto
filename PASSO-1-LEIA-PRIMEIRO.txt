@@ -1,0 +1,14 @@
+PROMOPRONTO — ETAPA 1 / GITHUB E VERCEL
+
+1) EXTRAIR ESTE ZIP NO COMPUTADOR.
+2) GITHUB: criar repositorio PRIVADO.
+3) Enviar TODOS OS ARQUIVOS E PASTAS EXTRAIDOS para a RAIZ do repositorio.
+   Nao faca upload apenas do ZIP.
+4) VERCEL: importar o repositorio GitHub, Root Directory = ./, Framework = Other.
+5) Clicar Deploy. Seu site abrira sem login ou pagamento ativos.
+
+ATENCAO: a ferramenta paga esta em _private/editor.html e NUNCA deve ficar em public/.
+O plano Vercel Hobby nao permite uso comercial. Planejar plano compativel para vendas.
+
+DEPOIS: conectar Firebase e, por ultimo, Kiwify.
+GUIA DETALHADO: README.md
