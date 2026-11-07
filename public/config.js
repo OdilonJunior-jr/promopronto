@@ -13,7 +13,7 @@ window.PROMOPRONTO_CONFIG = {
     measurementId: 'G-Z0MFWJWEX5'
   },
   // Preencher somente depois de configurar e testar a Kiwify.
-  checkoutUrl: '',
+  checkoutUrl: 'https://pay.kiwify.com.br/M3sJL40',
   // Opcional: e-mail de suporte ao comprador.
   supportEmail: ''
 };
