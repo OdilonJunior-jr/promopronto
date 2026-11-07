@@ -23,11 +23,37 @@ html{min-height:100%;min-height:100dvh}body{min-height:100dvh}
  .note{margin-top:10px!important}
 }
 @media(max-height:670px) and (max-width:780px){#publicArea .page{justify-content:flex-start;gap:12px;padding-top:13px}.hero h1{font-size:30px}.hero p,.benefit{display:none}.card{padding:15px}}
+
+/* Ajustes exclusivos do acesso mobile e do teclado virtual. */
+@media(max-width:768px){
+ html{scroll-padding-bottom:calc(24px + env(safe-area-inset-bottom));overflow-y:auto}
+ body{min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+ #publicArea{min-height:100dvh;height:auto;overflow:visible}
+ #publicArea .page{min-height:0;margin:auto;justify-content:center; padding-bottom:calc(35px + env(safe-area-inset-bottom))}
+ #loginForm{scroll-margin-top:calc(70px + env(safe-area-inset-top));scroll-margin-bottom:calc(25px + env(safe-area-inset-bottom))}
+ #email,#sendBtn{font-size:16px;min-height:48px;scroll-margin-bottom:calc(22px + env(safe-area-inset-bottom))}
+ .card{margin-bottom:max(0px,env(safe-area-inset-bottom))}
+}
+@media(max-width:768px) and (max-height:530px){
+ #publicArea .page{justify-content:flex-start;gap:8px;padding-top:10px;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+ .hero{display:none}.card{margin-top:0}
+}
 </style><link rel="icon" type="image/svg+xml" href="/favicon.svg"></head><body>
 <div id="publicArea"><header><a class="logo" href="/">promo<b>pronto.</b></a><a class="back" href="/">← Voltar ao site</a></header><main class="page"><div class="hero"><div class="eyebrow">ACESSO DO COMPRADOR</div><h1>Seu estúdio.<br/>Onde você estiver.</h1><p>Entrou, criou, publicou. Sem instalar aplicativo e sem baixar o editor. Acesse pelo celular ou computador.</p><div class="benefit"><span>✓</span> Login seguro por e-mail · Sem senha para lembrar</div></div><section class="card"><h2>Entrar no PromoPronto</h2><p>Use o mesmo e-mail informado na compra. Vamos enviar um link de entrada para sua caixa de entrada.</p><form id="loginForm"><label for="email">Seu e-mail</label><input autocomplete="email" id="email" name="email" placeholder="voce@exemplo.com" required="" type="email"/><button id="sendBtn" type="submit">Receber link de acesso</button></form><div aria-live="polite" class="status" id="status"></div><p class="note">Ainda não comprou? <a href="/">Conheça a ferramenta</a>. O acesso só é liberado após a confirmação do pagamento.</p></section></main></div>
 <div class="hidden" id="editorContainer"><div class="loading" id="loadingEditor">Validando sua compra e abrindo o editor…</div><iframe allow="clipboard-write" class="hidden" id="editorFrame" referrerpolicy="no-referrer" title="PromoPronto Studio — editor"></iframe></div>
 <script src="/config.js"></script><script type="module">const cfg = window.PROMOPRONTO_CONFIG || {}, f = cfg.firebase || {};
 const $ = id => document.getElementById(id), status=$('status'), form=$('loginForm');
+// Mantém o botão de acesso visível ao abrir o teclado virtual (Safari e Chrome mobile).
+const emailField=$('email');let loginScrollScheduled=false;
+function keepAccessFormVisible(){
+ if(!matchMedia('(max-width:768px)').matches||document.activeElement!==emailField)return;
+ if(loginScrollScheduled)return;loginScrollScheduled=true;
+ requestAnimationFrame(()=>{loginScrollScheduled=false;form.scrollIntoView({block:'center',behavior:'auto'});$('sendBtn').scrollIntoView({block:'nearest',behavior:'auto'});});
+}
+emailField.addEventListener('focus',()=>{setTimeout(keepAccessFormVisible,80);setTimeout(keepAccessFormVisible,280)});
+window.visualViewport?.addEventListener('resize',keepAccessFormVisible);
+window.addEventListener('orientationchange',()=>setTimeout(keepAccessFormVisible,150));
+
 const ready = [f.apiKey,f.projectId,f.appId,f.authDomain].every(v => typeof v==='string' && v && !/^(INSIRA_|SEU_)/.test(v));
 if (!ready) {
   status.textContent='Acesso ainda em configuração. O site de vendas já está no ar, mas o login será liberado na próxima etapa.';

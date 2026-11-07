@@ -1,0 +1,22 @@
+PromoPronto Studio — refatoração UX Mobile V2
+
+Alterações principais:
+- Mobile (até 768 px): cabeçalho compacto, desfazer/refazer, Exportar, menu de conta.
+- Quatro abas mobile: Modelos, Conteúdo, Estilo, Foto.
+- Animação e duração no painel Exportar, com botão de pausa no preview.
+- Edição por toque: barra rápida com 6 ações.
+- Painel móvel: recolhido, 35%, 60%; sem blur na arte.
+- Onboarding em 3 etapas e Ver dicas no menu.
+- Ajustes tipográficos/visuais e safe area / teclado na tela de login.
+- Desktop a partir de 1024 px: sem mudanças visuais confirmadas.
+
+Código completo está nos próprios arquivos HTML:
+_private/editor.html
+public/acesso.html
+
+Teste automatizado adicional:
+tests/mobile-ux-v2.test.js
+
+Execute `npm test` e siga TESTE-MOBILE-V2.md antes de publicar em produção.
+
+IMPORTANTE: publique primeiro numa BRANCH de teste do GitHub e faça deploy Preview na Vercel.
