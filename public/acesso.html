@@ -1,110 +1,169 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#101815" name="theme-color"/><title>Minha conta | PromoPronto Studio</title><meta content="Entre com seu e-mail e acesse o PromoPronto Studio online." name="description"/><style>
-:root{color-scheme:dark;--ink:#f4f7f3;--muted:#a3b1a8;--green:#c8ef87}*{box-sizing:border-box}body{margin:0;min-height:100dvh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#101815;display:flex;flex-direction:column}a{color:inherit}header{display:flex;align-items:center;justify-content:space-between;padding:20px max(20px,calc((100vw - 1150px)/2));border-bottom:1px solid #2b392f}header a{text-decoration:none}.logo{letter-spacing:-.055em;font-size:22px;font-weight:860}.logo b{color:var(--green)}.back{color:#acb8b0;font-size:13px}.page{width:100%;max-width:1080px;margin:auto;display:grid;grid-template-columns:1.04fr .96fr;gap:52px;align-items:center;padding:45px 24px 80px}.hero{padding:12px}.eyebrow{font-size:12px;color:var(--green);font-weight:800;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(39px,5vw,67px);line-height:1.04;letter-spacing:-.065em;margin:16px 0}.hero p{font-size:16px;line-height:1.65;color:var(--muted);max-width:430px}.benefit{display:flex;gap:10px;align-items:center;color:#d1ddd2;font-size:13px;margin-top:28px}.benefit span{background:#26382a;border-radius:8px;padding:8px;color:var(--green)}.card{background:#fff;color:#19261e;padding:34px;border-radius:24px;box-shadow:0 28px 85px #0004}.card h2{font-size:26px;letter-spacing:-.05em;margin:0 0 9px}.card p{color:#68786d;font-size:14px;line-height:1.65;margin:0 0 25px}.card label{display:block;font-size:12px;font-weight:800;margin-bottom:8px}.card input{width:100%;border:1px solid #d9e4da;border-radius:12px;font-size:16px;padding:15px 14px;color:#17271b;background:#fafcfb}.card button{width:100%;border:0;border-radius:12px;font-size:15px;font-weight:850;background:#234c36;color:white;padding:16px;cursor:pointer;margin-top:14px}.card button:hover{background:#316348}.card button:disabled{opacity:.55;cursor:wait}.status{min-height:24px;margin-top:13px;font-size:13px;color:#546457;line-height:1.5}.status.error{color:#a42b3f}.status.success{color:#266c3e}.note{font-size:12px!important;color:#879289!important;margin:18px 0 0!important}.hidden{display:none!important}#editorFrame{width:100%;height:100dvh;border:0;background:#fff;display:block}.topEditor{position:fixed;z-index:100;top:10px;right:10px;display:flex;gap:8px}.topEditor button{border:1px solid #d5dfd7;border-radius:999px;background:#fff;color:#234532;cursor:pointer;font-weight:700;padding:9px 14px;box-shadow:0 8px 20px #0002}#editorContainer{position:fixed;inset:0;z-index:99;background:#eaecea}.loading{display:flex;justify-content:center;align-items:center;min-height:100dvh;padding:20px;text-align:center;color:#bac8bd}@media(max-width:780px){.page{display:flex;flex-direction:column;align-items:stretch;gap:26px;padding:38px 18px 80px}.hero h1{font-size:40px}.hero p{font-size:14px}.card{padding:24px;border-radius:18px}.benefit{margin-top:15px}header{padding:17px 18px}.back{font-size:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-/* Safari iOS: formulários sempre dentro da área segura, inclusive com barras visíveis */
-html{min-height:100%;min-height:100dvh}body{min-height:100dvh}
-#publicArea{min-height:100dvh;display:flex;flex-direction:column}
-#publicArea header{flex:0 0 auto;padding-top:calc(16px + env(safe-area-inset-top));}
-#publicArea .page{flex:1 0 auto;margin:auto;padding-bottom:calc(34px + env(safe-area-inset-bottom))}
-#loginForm button{min-height:48px}
-#editorContainer,#editorFrame{height:100dvh;max-height:100dvh}
-@media(max-width:780px){
- #publicArea{min-height:100dvh}
- #publicArea .page{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;gap:15px;padding:20px 16px calc(22px + env(safe-area-inset-bottom));max-width:520px;width:100%}
- #publicArea .hero{padding:0 4px}
- .hero h1{font-size:clamp(30px,8vw,38px);margin:7px 0;line-height:1.05}
- .hero p{font-size:12px;line-height:1.45;margin:9px 0}
- .benefit{font-size:11px;margin-top:10px}
- .card{padding:19px 18px;border-radius:18px}
- .card h2{font-size:22px}.card p{font-size:12px;line-height:1.45;margin-bottom:14px}
- .card input{min-height:48px;padding:12px 13px}
- .card button{margin-top:10px;min-height:48px}
- .status{min-height:0;margin-top:9px}
- .note{margin-top:10px!important}
-}
-@media(max-height:670px) and (max-width:780px){#publicArea .page{justify-content:flex-start;gap:12px;padding-top:13px}.hero h1{font-size:30px}.hero p,.benefit{display:none}.card{padding:15px}}
-
-/* Ajustes exclusivos do acesso mobile e do teclado virtual. */
-@media(max-width:768px){
- html{scroll-padding-bottom:calc(24px + env(safe-area-inset-bottom));overflow-y:auto}
- body{min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch}
- #publicArea{min-height:100dvh;height:auto;overflow:visible}
- #publicArea .page{min-height:0;margin:auto;justify-content:center; padding-bottom:calc(35px + env(safe-area-inset-bottom))}
- #loginForm{scroll-margin-top:calc(70px + env(safe-area-inset-top));scroll-margin-bottom:calc(25px + env(safe-area-inset-bottom))}
- #email,#sendBtn{font-size:16px;min-height:48px;scroll-margin-bottom:calc(22px + env(safe-area-inset-bottom))}
- .card{margin-bottom:max(0px,env(safe-area-inset-bottom))}
-}
-@media(max-width:768px) and (max-height:530px){
- #publicArea .page{justify-content:flex-start;gap:8px;padding-top:10px;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
- .hero{display:none}.card{margin-top:0}
-}
-</style><link rel="icon" type="image/svg+xml" href="/favicon.svg"></head><body>
-<div id="publicArea"><header><a class="logo" href="/">promo<b>pronto.</b></a><a class="back" href="/">← Voltar ao site</a></header><main class="page"><div class="hero"><div class="eyebrow">ACESSO DO COMPRADOR</div><h1>Seu estúdio.<br/>Onde você estiver.</h1><p>Entrou, criou, publicou. Sem instalar aplicativo e sem baixar o editor. Acesse pelo celular ou computador.</p><div class="benefit"><span>✓</span> Login seguro por e-mail · Sem senha para lembrar</div></div><section class="card"><h2>Entrar no PromoPronto</h2><p>Use o mesmo e-mail informado na compra. Vamos enviar um link de entrada para sua caixa de entrada.</p><form id="loginForm"><label for="email">Seu e-mail</label><input autocomplete="email" id="email" name="email" placeholder="voce@exemplo.com" required="" type="email"/><button id="sendBtn" type="submit">Receber link de acesso</button></form><div aria-live="polite" class="status" id="status"></div><p class="note">Ainda não comprou? <a href="/">Conheça a ferramenta</a>. O acesso só é liberado após a confirmação do pagamento.</p></section></main></div>
-<div class="hidden" id="editorContainer"><div class="loading" id="loadingEditor">Validando sua compra e abrindo o editor…</div><iframe allow="clipboard-write" class="hidden" id="editorFrame" referrerpolicy="no-referrer" title="PromoPronto Studio — editor"></iframe></div>
-<script src="/config.js"></script><script type="module">const cfg = window.PROMOPRONTO_CONFIG || {}, f = cfg.firebase || {};
-const $ = id => document.getElementById(id), status=$('status'), form=$('loginForm');
-// Mantém o botão de acesso visível ao abrir o teclado virtual (Safari e Chrome mobile).
-const emailField=$('email');let loginScrollScheduled=false;
-function keepAccessFormVisible(){
- if(!matchMedia('(max-width:768px)').matches||document.activeElement!==emailField)return;
- if(loginScrollScheduled)return;loginScrollScheduled=true;
- requestAnimationFrame(()=>{loginScrollScheduled=false;form.scrollIntoView({block:'center',behavior:'auto'});$('sendBtn').scrollIntoView({block:'nearest',behavior:'auto'});});
-}
-emailField.addEventListener('focus',()=>{setTimeout(keepAccessFormVisible,80);setTimeout(keepAccessFormVisible,280)});
-window.visualViewport?.addEventListener('resize',keepAccessFormVisible);
-window.addEventListener('orientationchange',()=>setTimeout(keepAccessFormVisible,150));
-
-const ready = [f.apiKey,f.projectId,f.appId,f.authDomain].every(v => typeof v==='string' && v && !/^(INSIRA_|SEU_)/.test(v));
-if (!ready) {
-  status.textContent='Acesso ainda em configuração. O site de vendas já está no ar, mas o login será liberado na próxima etapa.';
-  status.className='status error';form.querySelector('button').disabled=true;
-} else {
-  initializeAccess().catch(err => {console.error('Falha ao iniciar autenticação',err);status.textContent='O acesso está temporariamente indisponível.';status.className='status error';form.querySelector('button').disabled=true;});
-}
-async function initializeAccess(){
- const [{initializeApp},{getAuth,onAuthStateChanged,sendSignInLinkToEmail,isSignInWithEmailLink,signInWithEmailLink,signOut}] = await Promise.all([
-  import('https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js'),
-  import('https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js')
- ]);
- const auth=getAuth(initializeApp(f)); auth.languageCode='pt';
- let opening=false;
- async function openEditor(user){
-  if(opening) return; opening=true;
-  $('publicArea').classList.add('hidden');$('editorContainer').classList.remove('hidden');
-  $('loadingEditor').textContent='Validando sua compra e abrindo o editor…';
-  try{
-   const token=await user.getIdToken();
-   const res=await fetch('/api/editor',{headers:{Authorization:`Bearer ${token}`},cache:'no-store'});
-   if(!res.ok){const data=await res.json().catch(()=>({}));throw new Error(res.status===403?'Ainda não identificamos uma compra ativa neste e-mail.':'Não foi possível liberar o editor agora.');}
-   const html=await res.text();$('editorFrame').srcdoc=html;
-   $('editorFrame').classList.remove('hidden');$('loadingEditor').classList.add('hidden');
-  }catch(err){$('editorContainer').classList.add('hidden');$('publicArea').classList.remove('hidden');status.textContent=err.message||'Não foi possível entrar.';status.className='status error';}
-  finally{opening=false;}
- }
- form.addEventListener('submit',async ev=>{
-  ev.preventDefault();const email=$('email').value.trim().toLowerCase();if(!email)return;
-  const btn=$('sendBtn');btn.disabled=true;status.textContent='Enviando link…';status.className='status';
-  try{
-   await sendSignInLinkToEmail(auth,email,{url:`${location.origin}/acesso.html`,handleCodeInApp:true});
-   localStorage.setItem('promopronto_login_email',email);
-   status.textContent='Verifique seu e-mail e a pasta de spam.';status.className='status success';
-  }catch(err){status.textContent='Não foi possível enviar o link. Confira o endereço ou tente novamente.';status.className='status error';console.error(err.code||err.message);}
-  finally{btn.disabled=false;}
- });
- // O menu de perfil fica DENTRO do editor; a sessão Firebase é encerrada apenas no pai.
- window.addEventListener('message',async e=>{
-  if(e.source!==$('editorFrame').contentWindow||e.origin!==location.origin||e.data?.type!=='PROMOPRONTO_LOGOUT_REQUEST')return;
-  if(!confirm('Deseja sair da sua conta? Seu rascunho local continuará salvo neste dispositivo.'))return;
-  await signOut(auth);
-  $('editorFrame').srcdoc='';$('editorFrame').classList.add('hidden');
-  $('loadingEditor').classList.remove('hidden');
-  $('editorContainer').classList.add('hidden');$('publicArea').classList.remove('hidden');
- });
- if(isSignInWithEmailLink(auth,location.href)){
-  let email=localStorage.getItem('promopronto_login_email');
-  if(!email)email=prompt('Informe o e-mail usado para solicitar acesso:');
-  if(email){try{await signInWithEmailLink(auth,email.trim().toLowerCase(),location.href);localStorage.removeItem('promopronto_login_email');history.replaceState({},'', '/acesso.html');}catch{status.textContent='Link expirado ou inválido. Solicite um novo.';status.className='status error';}}
- }
- onAuthStateChanged(auth,u=>{if(u&&u.emailVerified)openEditor(u);});
-}
-</script></body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#102019">
+  <meta name="description" content="Acesse o PromoPronto Studio com sua senha ou pelo link seguro enviado ao seu e-mail.">
+  <meta name="referrer" content="no-referrer">
+  <title>Entrar | PromoPronto Studio</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme:light; --pine:#102019; --deep:#1c3425; --lime:#c9ee8d; --paper:#f6f8f3; --border:#dae3d7; --muted:#647369; --ink:#1b2e23; --danger:#ad3343; --success:#206940; }
+    * { box-sizing:border-box; }
+    html { min-height:100%; min-height:100dvh; scroll-padding-bottom:calc(30px + env(safe-area-inset-bottom)); -webkit-text-size-adjust:100%; }
+    body { min-height:100dvh; margin:0; background:var(--paper); color:var(--ink); font-family:'DM Sans',system-ui,-apple-system,sans-serif; overflow-y:auto; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    a { color:inherit; }
+    button:focus-visible,input:focus-visible,a:focus-visible { outline:3px solid #609b40; outline-offset:3px; }
+    [hidden],.hidden { display:none!important; }
+    #publicArea { min-height:100dvh; display:flex; flex-direction:column; }
+    .top { flex:0 0 auto; min-height:70px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:calc(12px + env(safe-area-inset-top)) max(24px,calc((100vw - 1120px)/2)) 14px; background:var(--pine); color:#f2f8ef; }
+    .logo { text-decoration:none; font-family:Outfit,sans-serif; font-weight:800; font-size:24px; letter-spacing:-.072em; white-space:nowrap; }
+    .logo b { color:var(--lime); }
+    .logo small { display:inline-block; margin-left:8px; font:700 10px 'DM Sans',sans-serif; letter-spacing:.14em; color:#a9bba8; vertical-align:middle; }
+    .back { font-size:13px; font-weight:700; text-decoration:none; color:#c6d5c7; min-height:44px; display:inline-flex; align-items:center; }
+    .page { flex:1; width:100%; max-width:1100px; margin:auto; padding:44px 28px calc(45px + env(safe-area-inset-bottom)); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,460px); align-items:center; gap:76px; }
+    .intro { max-width:455px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:800; color:#3e7550; }
+    .eyebrow:before { content:""; width:8px; height:8px; border-radius:50%; background:#72ac42; }
+    h1,h2 { font-family:Outfit,'DM Sans',sans-serif; letter-spacing:-.058em; }
+    .intro h1 { font-weight:700; line-height:1.02; font-size:clamp(42px,4.8vw,68px); margin:22px 0; }
+    .intro h1 span { color:#537948; }
+    .intro p { line-height:1.65; color:var(--muted); font-size:15px; max-width:405px; }
+    .points { display:flex; flex-direction:column; gap:13px; margin-top:31px; }
+    .point { display:flex; align-items:center; gap:11px; font-size:13px; color:#415b48; font-weight:600; }
+    .point svg { flex:0 0 auto; width:20px; height:20px; color:#3f814a; }
+    .card { background:white; border:1px solid var(--border); border-radius:24px; box-shadow:0 23px 75px #172c1910; padding:34px; min-width:0; }
+    .cardBadge { display:inline-flex; gap:8px; align-items:center; background:#eaf5db; border-radius:999px; padding:7px 11px; font-size:11px; font-weight:800; color:#285037; margin-bottom:20px; }
+    .cardBadge svg { width:15px; height:15px; }
+    .card h2 { font-size:29px; font-weight:700; margin:0 0 9px; line-height:1.15; }
+    .description { font-size:13px; line-height:1.65; color:var(--muted); margin:0 0 24px; }
+    .field { margin:0 0 15px; }
+    label { display:block; font-size:12px; font-weight:800; margin-bottom:8px; }
+    input { display:block; width:100%; height:50px; font-size:16px; border:1.5px solid #cedbce; border-radius:12px; background:#fbfcfa; color:#1a3020; padding:0 14px; box-shadow:none; }
+    input::placeholder { color:#849087; }
+    input:focus { border-color:#568d55; background:white; outline:2px solid #c8e7af; outline-offset:1px; }
+    .passwordWrap { display:flex; align-items:stretch; position:relative; }
+    .passwordWrap input { padding-right:70px; }
+    .togglePassword { position:absolute; right:4px; top:3px; height:44px; min-width:57px; padding:0 8px; background:transparent; border:0; border-radius:9px; color:#4d7156; font-size:12px; font-weight:800; }
+    .primary { display:flex; align-items:center; justify-content:center; width:100%; min-height:50px; background:var(--deep); color:#fff; border:0; border-radius:12px; font-weight:800; font-size:14px; padding:12px 16px; margin-top:8px; }
+    .primary:hover { background:#294b33; }
+    .primary:disabled,button:disabled { opacity:.55; cursor:wait; }
+    .secondary { display:flex; align-items:center; justify-content:center; min-height:44px; padding:7px 12px; border:1px solid #d4e2d2; border-radius:11px; background:#f7faf5; color:#365744; font-size:13px; font-weight:800; text-decoration:none; }
+    .secondary:hover { background:#edf6e9; }
+    .textAction { border:0; background:none; min-height:44px; color:#326945; text-decoration:underline; text-underline-offset:3px; font-size:13px; font-weight:800; padding:6px 3px; }
+    .formOptions { display:flex; align-items:center; justify-content:flex-end; margin:-5px 0 8px; }
+    .formDivider { display:flex; align-items:center; gap:12px; margin:20px 0 12px; font-size:11px; color:#78857b; font-weight:700; }
+    .formDivider:before,.formDivider:after { content:""; height:1px; background:#e4ece3; flex:1; }
+    .smallText { color:#788579; font-size:12px; line-height:1.55; margin-top:17px; }
+    .smallText a { color:#2b6839; font-weight:800; }
+    .status { font-size:13px; line-height:1.5; border-radius:10px; margin:13px 0 0; padding:11px 13px; background:#f2f6ed; color:#344d3a; }
+    .status.error { color:#963044; background:#fff0f1; }
+    .status.success { color:#235d3a; background:#e9f6e9; }
+    .status:empty { display:none; }
+    .busy { text-align:center; padding:26px 0; color:var(--muted); font-size:14px; line-height:1.6; }
+    .spinner { display:block; width:28px; height:28px; border:3px solid #dbe5d7; border-top-color:#538c4a; border-radius:50%; margin:0 auto 14px; animation:spin .85s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .hint { margin:5px 0 13px; font-size:12px; color:#6e7e71; line-height:1.5; }
+    .setupNote { background:#f1f8e9; padding:11px; border-radius:10px; color:#426344; font-size:12px; line-height:1.5; margin-bottom:15px; }
+    .stack { display:grid; gap:10px; }
+    .blockedActions { margin-top:15px; }
+    #editorContainer { position:fixed; inset:0; height:100dvh; background:#e9efea; z-index:10; }
+    #editorFrame { width:100%; height:100dvh; display:block; border:0; background:white; }
+    .editorLoading { display:grid; place-content:center; text-align:center; gap:9px; min-height:100dvh; color:#33503c; font-size:13px; padding:20px; }
+    .editorLoading .spinner { margin:0 auto; }
+    #runtimeWarning { position:fixed; z-index:20; left:12px; right:12px; top:calc(10px + env(safe-area-inset-top)); background:#fff7e7; color:#704917; border:1px solid #efdaa9; box-shadow:0 10px 22px #0003; border-radius:12px; padding:11px 14px; font-size:12px; line-height:1.5; text-align:center; pointer-events:none; }
+    @media (max-width:768px) {
+      .top { padding:calc(7px + env(safe-area-inset-top)) 17px 7px; min-height:58px; }
+      .logo { font-size:22px; }.logo small { font-size:9px; }.back { font-size:12px; }
+      .page { display:flex; flex-direction:column; justify-content:center; gap:23px; max-width:480px; padding:26px 16px calc(26px + env(safe-area-inset-bottom)); }
+      .intro { max-width:none; align-self:stretch; }.intro h1 { font-size:clamp(28px,8vw,36px); margin:10px 0 0; }.intro h1 br { display:none; }
+      .intro p { font-size:12px; margin:7px 0 0; line-height:1.5; }
+      .points { display:none; }.eyebrow { font-size:10px; }
+      .card { width:100%; padding:23px 20px; border-radius:18px; box-shadow:0 14px 40px #172c1910; }
+      .cardBadge { margin-bottom:12px; }.card h2 { font-size:25px; }.description { margin-bottom:19px; }
+    }
+    @media (max-width:768px) and (max-height:690px) {
+      .page { justify-content:flex-start; gap:12px; padding-top:12px; }.intro p { display:none; }.intro h1 { font-size:27px; }.card { padding:19px; }
+    }
+    @media (max-width:768px) and (max-height:525px) { .intro { display:none; }.page { padding-top:12px; } }
+    @media (prefers-reduced-motion:reduce) { .spinner { animation:none; } }
+  </style>
+</head>
+<body>
+<div id="publicArea">
+  <header class="top">
+    <a class="logo" href="/" aria-label="PromoPronto Studio, página inicial">promo<b>pronto.</b><small>STUDIO</small></a>
+    <a class="back" href="/">Voltar ao site</a>
+  </header>
+  <main class="page">
+    <section class="intro" aria-label="Sobre o seu acesso">
+      <span class="eyebrow">ÁREA EXCLUSIVA DO CLIENTE</span>
+      <h1>Seu estúdio, <br><span>sempre por perto.</span></h1>
+      <p>Volte às suas criações com segurança. Entre com sua senha ou use o link de acesso quando precisar.</p>
+      <div class="points">
+        <div class="point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>Sua sessão fica salva neste dispositivo</div>
+        <div class="point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>Entrada exclusiva para compradores autorizados</div>
+      </div>
+    </section>
+    <section class="card" aria-label="Acesso ao Studio">
+      <div class="cardBadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg> ACESSO SEGURO</div>
+      <h2 id="panelTitle">Preparando seu acesso</h2>
+      <p class="description" id="panelDescription">Conferindo se você já está conectado.</p>
+      <div id="checkingPanel" data-panel="checking" class="busy" role="status"><span class="spinner" aria-hidden="true"></span>Verificando sessão…</div>
+      <form id="loginForm" data-panel="login" hidden>
+        <div class="field"><label for="loginEmail">E-mail da compra</label><input id="loginEmail" name="username" type="email" inputmode="email" autocomplete="username" placeholder="voce@exemplo.com" maxlength="254" required></div>
+        <div class="field"><label for="loginPassword">Sua senha</label><div class="passwordWrap"><input id="loginPassword" name="password" type="password" autocomplete="current-password" required><button class="togglePassword" type="button" data-password-toggle="loginPassword" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button></div></div>
+        <div class="formOptions"><button type="button" class="textAction" data-go="reset">Esqueci minha senha</button></div>
+        <button type="submit" id="loginBtn" class="primary">Entrar no Studio</button>
+        <div class="formDivider">Primeira vez ou sem senha?</div>
+        <button type="button" class="secondary" data-go="link">Receber link de acesso</button>
+      </form>
+      <form id="linkForm" data-panel="link" hidden>
+        <div class="field"><label for="linkEmail">E-mail usado na compra</label><input id="linkEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@exemplo.com" maxlength="254" required></div>
+        <button id="linkBtn" type="submit" class="primary">Enviar link seguro</button>
+        <button type="button" class="textAction" data-go="login">Voltar ao login com senha</button>
+      </form>
+      <form id="confirmLinkForm" data-panel="confirmLink" hidden>
+        <div class="field"><label for="confirmEmail">Confirme o e-mail que recebeu o link</label><input id="confirmEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@exemplo.com" maxlength="254" required></div>
+        <button id="confirmLinkBtn" type="submit" class="primary">Confirmar e abrir o Studio</button>
+        <p class="hint">Por segurança, confirme o endereço original. Ele não é preenchido a partir do link.</p>
+      </form>
+      <form id="resetForm" data-panel="reset" hidden>
+        <div class="field"><label for="resetEmail">Seu e-mail</label><input id="resetEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@exemplo.com" maxlength="254" required></div>
+        <button id="resetBtn" type="submit" class="primary">Enviar recuperação de senha</button>
+        <button type="button" class="textAction" data-go="login">Voltar ao login</button>
+      </form>
+      <form id="setupForm" data-panel="setup" hidden>
+        <div class="setupNote">Seu e-mail foi confirmado e sua compra foi localizada. Crie uma senha para entrar sem pedir novos links.</div>
+        <div class="field"><label for="newPassword">Crie uma senha</label><div class="passwordWrap"><input id="newPassword" type="password" autocomplete="new-password" minlength="10" maxlength="128" required placeholder="Pelo menos 10 caracteres"><button type="button" class="togglePassword" data-password-toggle="newPassword" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button></div></div>
+        <div class="field"><label for="confirmPassword">Confirme a senha</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="10" maxlength="128" required></div>
+        <button id="setupBtn" class="primary" type="submit">Salvar senha e abrir Studio</button>
+        <button id="skipSetupBtn" class="textAction" type="button">Agora não, continuar com link</button>
+      </form>
+      <div id="blockedPanel" data-panel="blocked" hidden>
+        <p class="hint" id="blockedMessage">Não conseguimos validar seu acesso agora.</p>
+        <div class="stack blockedActions">
+          <button class="primary" id="retryAccessBtn" type="button">Tentar novamente</button>
+          <button class="secondary" id="otherAccountBtn" type="button">Entrar com outra conta</button>
+        </div>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></div>
+      <p class="smallText">Ainda não comprou? <a href="/">Conheça o PromoPronto</a>. O acesso depende da confirmação da compra.</p>
+    </section>
+  </main>
+</div>
+<div id="editorContainer" hidden>
+  <div class="editorLoading" id="loadingEditor" role="status"><span class="spinner" aria-hidden="true"></span><span>Validando sua compra e preparando o editor…</span></div>
+  <iframe id="editorFrame" title="PromoPronto Studio — editor" referrerpolicy="no-referrer" allow="clipboard-write" hidden></iframe>
+</div>
+<div id="runtimeWarning" hidden role="alert"></div>
+<script src="/config.js"></script>
+<script type="module" src="/acesso.js"></script>
+</body>
+</html>

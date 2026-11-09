@@ -65,7 +65,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
-  if (req.method !== 'GET') return res.status(405).json({ ok: false, error: 'Método não permitido' });
+  if (req.method !== 'GET' && req.method !== 'HEAD') return res.status(405).json({ ok: false, error: 'Método não permitido' });
   if (!configured()) return res.status(503).json({ ok: false, error: 'Autenticação ainda não configurada' });
   const authorization = String(req.headers.authorization || '');
   if (!authorization.startsWith('Bearer ')) return res.status(401).json({ ok: false, error: 'É necessário entrar' });
@@ -91,6 +91,9 @@ module.exports = async function handler(req, res) {
     if (!entitlement.exists || entitlement.data()?.active !== true) {
       return res.status(403).json({ ok: false, error: 'Compra não aprovada para este e-mail' });
     }
+
+    // HEAD oferece uma checagem leve para revogações sem reenviar o código do editor.
+    if (req.method === 'HEAD') return res.status(204).end();
 
     stage = 'entrega-editor';
     const editor = readFileSync(join(process.cwd(), '_private', 'editor.html'), 'utf8');

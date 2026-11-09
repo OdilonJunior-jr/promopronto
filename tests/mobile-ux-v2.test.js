@@ -6,6 +6,7 @@ const {Script} = require('node:vm');
 const root = join(__dirname, '..');
 const editor = readFileSync(join(root, '_private', 'editor.html'), 'utf8');
 const login = readFileSync(join(root, 'public', 'acesso.html'), 'utf8');
+const loginJs = readFileSync(join(root, 'public', 'acesso.js'), 'utf8');
 const js = editor.match(/<script>([\s\S]*?)<\/script>/)?.[1];
 
 test('editor sem erros de sintaxe', () => assert.doesNotThrow(() => new Script(js)));
@@ -43,12 +44,12 @@ test('onboarding em três etapas pode ser reaberto e guardado', () => {
 });
 test('menu de conta e logout com confirmação mantidos', () => {
  assert.match(editor, /id="logoutRequest"/);
- assert.match(login, /confirm\('Deseja sair da sua conta\?/);
- assert.match(login, /PROMOPRONTO_LOGOUT_REQUEST/);
+ assert.match(loginJs, /confirm\('Sair da conta\?/);
+ assert.match(loginJs, /PROMOPRONTO_LOGOUT_REQUEST/);
 });
 test('login usa viewport dinâmico, safe-areas e correção do teclado', () => {
  assert.match(login, /100dvh/);
  assert.match(login, /env\(safe-area-inset-bottom\)/);
- assert.match(login, /visualViewport\?\.addEventListener\('resize',keepAccessFormVisible\)/);
- assert.match(login, /scrollIntoView/);
+ assert.match(loginJs, /visualViewport\?\.addEventListener\('resize', focusVisibleField\)/);
+ assert.match(loginJs, /scrollIntoView/);
 });

@@ -7,6 +7,7 @@ const { Script } = require('node:vm');
 const root = join(__dirname, '..');
 const editor = readFileSync(join(root, '_private', 'editor.html'), 'utf8');
 const acesso = readFileSync(join(root, 'public', 'acesso.html'), 'utf8');
+const acessoJs = readFileSync(join(root, 'public', 'acesso.js'), 'utf8');
 const editorScript = editor.match(/<script>([\s\S]*?)<\/script>/)?.[1];
 
 test('o JavaScript do editor é sintaticamente válido', () => {
@@ -30,9 +31,9 @@ test('histórico, exportação, perfil e menu de saída existem sem botões sobr
     assert.match(editor, new RegExp(`id="${id}"`), id);
   }
   assert.doesNotMatch(acesso, /id="exitBtn"/);
-  assert.match(acesso, /PROMOPRONTO_LOGOUT_REQUEST/);
-  assert.match(acesso, /e\.source!==\$\('editorFrame'\)\.contentWindow/);
-  assert.match(acesso, /confirm\('Deseja sair da sua conta\?/);
+  assert.match(acessoJs, /PROMOPRONTO_LOGOUT_REQUEST/);
+  assert.match(acessoJs, /event\.source !== \$\('editorFrame'\)\.contentWindow/);
+  assert.match(acessoJs, /confirm\('Sair da conta\?/);
 });
 
 test('painel tem três estados e não escurece nem desfoca a prévia', () => {
